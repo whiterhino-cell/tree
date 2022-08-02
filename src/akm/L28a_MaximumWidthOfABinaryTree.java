@@ -2,14 +2,14 @@ package akm;
 
 class L28a_MaximumWidthOfABinaryTree {
 
-    int widthOfBinaryTree(TreeNode node) {
+    int widthOfBinaryTree(TreeNode root) {
         int maxWidth = 0;
         int width;
-        int h = height(node);
+        int h = height(root);
         int i;
 
         for (i = 1; i <= h; i++) {
-            width = getWidth(node, i);
+            width = getWidth(root, i);
             if (width > maxWidth)
                 maxWidth = width;
         }
