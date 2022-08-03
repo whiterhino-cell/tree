@@ -3,16 +3,17 @@ package akm;
 import java.util.ArrayList;
 import java.util.List;
 
-public class L37b_MorrisTraversal {
-    public List<Integer> preorderTraversal(TreeNode root) {
-        List<Integer> postorder = new ArrayList<Integer>();
+public class L37c_MorrisTraversal_in {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> inorder = new ArrayList<Integer>();
 
         TreeNode cur = root;
         while(cur != null) {
             if(cur.left == null) {
-                postorder.add(cur.val);
+                inorder.add(cur.val);
                 cur = cur.right;
-            } else {
+            }
+            else {
                 TreeNode prev = cur.left;
                 while(prev.right != null && prev.right != cur) {
                     prev = prev.right;
@@ -20,14 +21,15 @@ public class L37b_MorrisTraversal {
 
                 if(prev.right == null) {
                     prev.right = cur;
-                    postorder.add(cur.val);
                     cur = cur.left;
-                } else {
+                }
+                else {
                     prev.right = null;
+                    inorder.add(cur.val);
                     cur = cur.right;
                 }
             }
         }
-        return postorder;
+        return inorder;
     }
 }

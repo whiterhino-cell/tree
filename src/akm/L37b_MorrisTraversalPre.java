@@ -3,7 +3,7 @@ package akm;
 import java.util.ArrayList;
 import java.util.List;
 
-public class L37c_MorrisTraversal_pre {
+public class L37b_MorrisTraversalPre {
     public List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> postorder = new ArrayList<Integer>();
 

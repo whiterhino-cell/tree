@@ -1,37 +1,32 @@
 package akm;
 
-public class L38a_FlattenBinaryTree {
+import java.util.ArrayDeque;
+import java.util.Deque;
 
-    TreeNode root;
+public class L38c_FlattenBinaryTree {
 
     public void flatten(TreeNode root) {
+        if(root == null) return;
 
-        if (root == null)
-            return;
+        Deque<TreeNode> st = new ArrayDeque<>();
+        st.push(root);
+        while(!st.isEmpty()) {
+            TreeNode cur = st.peek();
+            st.pop();
 
-        if (root.left == null &&
-                root.right == null)
-            return;
-
-        if (root.left != null) {
-
-            flatten(root.left);
-
-            TreeNode tempTreeNode = root.right;
-            root.right = root.left;
-            root.left = null;
-
-            TreeNode curr = root.right;
-            while (curr.right != null) {
-                curr = curr.right;
+            if(cur.right != null) {
+                st.push(cur.right);
             }
-
-            curr.right = tempTreeNode;
+            if(cur.left != null) {
+                st.push(cur.left);
+            }
+            if(!st.isEmpty()) {
+                cur.right = st.peek();
+            }
+            cur.left = null;
         }
-        flatten(root.right);
 
     }
-
     public void inOrder(TreeNode treeNode) {
 
         if (treeNode == null)
@@ -42,9 +37,10 @@ public class L38a_FlattenBinaryTree {
         inOrder(treeNode.right);
     }
 
+    TreeNode root;
     // Driver code
     public static void main(String[] args) {
-        L38a_FlattenBinaryTree tree = new L38a_FlattenBinaryTree();
+        L38c_FlattenBinaryTree tree = new L38c_FlattenBinaryTree();
 
 	/*   1
 		/ \
