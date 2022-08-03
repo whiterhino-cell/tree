@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class L34b_Construct_aBinaryTree {
 
-    public static Node root;
+    public static TreeNode root;
 
     // Store indexes of all items so that we
     // we can quickly find later
@@ -17,7 +17,7 @@ public class L34b_Construct_aBinaryTree {
         0 and len -1. The function doesn't do any error
         checking for cases where inorder and preorder
         do not form a tree */
-    public static Node buildTree(char[] in, char[] pre, int inStrt, int inEnd) {
+    public static TreeNode buildTree(char[] in, char[] pre, int inStrt, int inEnd) {
 
         if(inStrt > inEnd) {
             return null;
@@ -26,12 +26,12 @@ public class L34b_Construct_aBinaryTree {
 	/* Pick current node from Preorder traversal using preIndex
 		and increment preIndex */
         char curr = pre[preIndex++];
-        Node tNode;
-        tNode = new Node(curr);
+        TreeNode tTreeNode;
+        tTreeNode = new TreeNode(curr);
 
         /* If this node has no children then return */
         if (inStrt == inEnd) {
-            return tNode;
+            return tTreeNode;
         }
 
         /* Else find the index of this node in Inorder traversal */
@@ -39,14 +39,14 @@ public class L34b_Construct_aBinaryTree {
 
 	/* Using index in Inorder traversal, construct left and
 		right subtress */
-        tNode.left = buildTree(in, pre, inStrt, inIndex - 1);
-        tNode.right = buildTree(in, pre, inIndex + 1, inEnd);
-        return tNode;
+        tTreeNode.left = buildTree(in, pre, inStrt, inIndex - 1);
+        tTreeNode.right = buildTree(in, pre, inIndex + 1, inEnd);
+        return tTreeNode;
     }
 
     // This function mainly creates an unordered_map, then
 // calls buildTree()
-    public static Node buldTreeWrap(char[] in, char[] pre, int len) {
+    public static TreeNode buldTreeWrap(char[] in, char[] pre, int len) {
         for(int i = 0; i < len; i++) {
             mp.put(in[i], i);
         }
@@ -54,13 +54,13 @@ public class L34b_Construct_aBinaryTree {
     }
 
     /* This function is here just to test buildTree() */
-    static void printInorder(Node node) {
-        if(node == null) {
+    static void printInorder(TreeNode treeNode) {
+        if(treeNode == null) {
             return;
         }
-        printInorder(node.left);
-        System.out.print(node.data + " ");
-        printInorder(node.right);
+        printInorder(treeNode.left);
+        System.out.print(treeNode.val + " ");
+        printInorder(treeNode.right);
     }
 
     /* Driver code */

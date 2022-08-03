@@ -5,25 +5,18 @@ import java.util.List;
 
 public class L30b_All_nodes_at_distance_k {
 
-    List<TreeNode> path = null;
-    //Finding all the nodes at a distance K from target
-    //node.
     public List<Integer> distanceK(TreeNode root, TreeNode target, int K) {
-        path = new ArrayList<>();
-        findPath(root, target);
+        List<TreeNode>  path = new ArrayList<>();
+        findPath(root, target,path);
         List<Integer> result = new ArrayList<>();
         for (int i = 0; i < path.size(); i++) {
             findKDistanceFromNode(
                     path.get(i), K - i, result,
                     i == 0 ? null : path.get(i - 1));
         }
-        //Returing list of all nodes at a distance K
         return result;
     }
 
-    // Blocker is used for ancestors node if target at
-    //left then we have to go in right or if target at
-    // right then we have to go in left.
     public void findKDistanceFromNode(TreeNode node, int dist, List<Integer> result, TreeNode blocker) {
         if (dist < 0 || node == null || (blocker != null && node == blocker)) {
             return;
@@ -38,23 +31,22 @@ public class L30b_All_nodes_at_distance_k {
         findKDistanceFromNode(node.right, dist - 1, result,
                 blocker);
     }
-    //Finding the path of target node from root node
-    public boolean findPath(TreeNode node, TreeNode target) {
+    public boolean findPath(TreeNode node, TreeNode target,List<TreeNode>  path ) {
         if (node == null)
             return false;
 
-        if (node == target || findPath(node.left, target)
-                || findPath(node.right, target)) {
+        if (node == target || findPath(node.left, target,path)
+                || findPath(node.right, target,path)) {
             path.add(node);
             return true;
         }
 
         return false;
     }
-    // Driver program to test the above functions
+
     public static void main(String[] args) {
-        L30b_All_nodes_at_distance_k gfg = new L30b_All_nodes_at_distance_k();
-        /* Let us construct the tree shown in above diagram */
+        L30b_All_nodes_at_distance_k distance_k = new L30b_All_nodes_at_distance_k();
+
         TreeNode root = new TreeNode(20);
         root.left = new TreeNode(8);
         root.right = new TreeNode(22);
@@ -63,7 +55,7 @@ public class L30b_All_nodes_at_distance_k {
         root.left.right.left = new TreeNode(10);
         root.left.right.right = new TreeNode(14);
         TreeNode target = root.left.right;
-        System.out.println(gfg.distanceK(root, target, 2));
+        System.out.println(distance_k.distanceK(root, target, 2));
     }
 
 }

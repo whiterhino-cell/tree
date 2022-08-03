@@ -2,62 +2,62 @@ package akm;
 
 public class L38a_FlattenBinaryTree {
 
-    Node root;
+    TreeNode root;
 
 //    Function to convert binary tree into
 //    linked list by altering the right node
 //    and making left node NULL
-    public void flatten(Node node) {
+    public void flatten(TreeNode treeNode) {
 
         // Base case - return if root is NULL
-        if (node == null)
+        if (treeNode == null)
             return;
 
         // Or if it is a leaf node
-        if (node.left == null &&
-                node.right == null)
+        if (treeNode.left == null &&
+                treeNode.right == null)
             return;
 
         // If root.left children exists then we have
         // to make it node.right (where node is root)
-        if (node.left != null) {
+        if (treeNode.left != null) {
 
             // Move left recursively
-            flatten(node.left);
+            flatten(treeNode.left);
 
             // Store the node.right in
             // Node named tempNode
-            Node tempNode = node.right;
-            node.right = node.left;
-            node.left = null;
+            TreeNode tempTreeNode = treeNode.right;
+            treeNode.right = treeNode.left;
+            treeNode.left = null;
 
             // Find the position to insert
             // the stored value
-            Node curr = node.right;
+            TreeNode curr = treeNode.right;
             while (curr.right != null) {
                 curr = curr.right;
             }
 
             // Insert the stored value
-            curr.right = tempNode;
+            curr.right = tempTreeNode;
         }
 
         // Now call the same function
         // for node.right
-        flatten(node.right);
+        flatten(treeNode.right);
 
     }
 
     // Function for Inorder traversal
-    public void inOrder(Node node) {
+    public void inOrder(TreeNode treeNode) {
 
         // Base Condition
-        if (node == null)
+        if (treeNode == null)
             return;
 
-        inOrder(node.left);
-        System.out.print(node.data + " ");
-        inOrder(node.right);
+        inOrder(treeNode.left);
+        System.out.print(treeNode.val + " ");
+        inOrder(treeNode.right);
     }
 
     // Driver code
@@ -72,12 +72,12 @@ public class L38a_FlattenBinaryTree {
 
 	 */
 
-        tree.root = new Node(1);
-        tree.root.left = new Node(2);
-        tree.root.right = new Node(5);
-        tree.root.left.left = new Node(3);
-        tree.root.left.right = new Node(4);
-        tree.root.right.right = new Node(6);
+        tree.root = new TreeNode(1);
+        tree.root.left = new TreeNode(2);
+        tree.root.right = new TreeNode(5);
+        tree.root.left.left = new TreeNode(3);
+        tree.root.left.right = new TreeNode(4);
+        tree.root.right.right = new TreeNode(6);
 
         System.out.println("The Inorder traversal after " + "flattening binary tree ");
 

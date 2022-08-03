@@ -80,15 +80,14 @@ public class L36_SerializeAndDe_SerializeBinaryTree {
         tree.root.left.right.right = new TreeNode(14);
 
         String serialized = serialize(tree.root);
-        System.out.println("Serialized view of the tree:");
+//        System.out.println("Serialized view of the tree:");
         System.out.println(serialized);
         System.out.println();
 
         // Let us deserialize the stored tree into root1
         TreeNode t = deserialize(serialized);
 
-        System.out.println(
-                "Inorder Traversal of the tree constructed from serialized String:");
+//        System.out.println("Inorder Traversal of the tree constructed from serialized String:");
         inorder(t);
     }
 

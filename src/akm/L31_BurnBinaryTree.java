@@ -11,14 +11,11 @@ public class L31_BurnBinaryTree {
     // function to print the sequence of burning nodes
     public static int search(TreeNode root, int num, Map<Integer, Set<Integer>> levelOrderMap) {
         if (root != null) {
-            // Condition to check whether target
-            // node is found or not in a tree
             if (root.val == num) {
 
                 levelOrderStoredInMap(root.left, 1, levelOrderMap);
                 levelOrderStoredInMap(root.right, 1, levelOrderMap);
-                // Return statements to prevent
-                // further function calls
+
                 return 1;
             }
             int k = search(root.left, num, levelOrderMap);
@@ -86,15 +83,11 @@ public class L31_BurnBinaryTree {
         right.left = new TreeNode(22);
         right.right = new TreeNode(23);
 
-        // Utility map to store the sequence of burning
-        // nodes
         Map<Integer, Set<Integer> > levelOrderMap = new HashMap<>();
 
-        // search node and store the level order from that
-        // node in map
         search(root, 14, levelOrderMap);
 
-        // will print the sequence of burning nodes
+        System.out.println(levelOrderMap);
         System.out.println(14);
         for (Integer level : levelOrderMap.keySet()) {
             for (Integer val : levelOrderMap.get(level)) {

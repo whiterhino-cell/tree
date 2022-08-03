@@ -8,26 +8,26 @@ public class L35a_From_PostNInConstBinaryTree {
     be 0 and n -1. The function doesn't do any error
     checking for cases where inorder and postorder
     do not form a tree */
-    Node buildUtil(int in[], int post[], int inStrt, int inEnd, int postStrt, int postEnd) {
+    TreeNode buildUtil(int in[], int post[], int inStrt, int inEnd, int postStrt, int postEnd) {
         // Base case
         if (inStrt > inEnd)
             return null;
 
 		/* Pick current node from Postrder traversal using
 		postIndex and decrement postIndex */
-        Node node = new Node(post[postEnd]);
+        TreeNode treeNode = new TreeNode(post[postEnd]);
 
         /* If this node has no children then return */
         if (inStrt == inEnd)
-            return node;
-        int iIndex = search(in, inStrt, inEnd, node.data);
+            return treeNode;
+        int iIndex = search(in, inStrt, inEnd, treeNode.val);
 
 		/* Using index in Inorder traversal, construct left
 		and right subtress */
-        node.left = buildUtil(in, post, inStrt, iIndex - 1, postStrt, postStrt - inStrt + iIndex - 1);
-        node.right = buildUtil(in, post, iIndex + 1, inEnd, postEnd - inEnd + iIndex, postEnd - 1);
+        treeNode.left = buildUtil(in, post, inStrt, iIndex - 1, postStrt, postStrt - inStrt + iIndex - 1);
+        treeNode.right = buildUtil(in, post, iIndex + 1, inEnd, postEnd - inEnd + iIndex, postEnd - 1);
 
-        return node;
+        return treeNode;
     }
 
     /* Function to find index of value in arr[start...end]
@@ -43,12 +43,12 @@ public class L35a_From_PostNInConstBinaryTree {
     }
 
     /* This function is here just to test */
-    void preOrder(Node node) {
-        if (node == null)
+    void preOrder(TreeNode treeNode) {
+        if (treeNode == null)
             return;
-        System.out.print(node.data + " ");
-        preOrder(node.left);
-        preOrder(node.right);
+        System.out.print(treeNode.val + " ");
+        preOrder(treeNode.left);
+        preOrder(treeNode.right);
     }
 
     // Driver Code
@@ -57,7 +57,7 @@ public class L35a_From_PostNInConstBinaryTree {
         int in[] = new int[] { 4, 8, 2, 5, 1, 6, 3, 7 };
         int post[] = new int[] { 8, 4, 5, 2, 6, 7, 3, 1 };
         int n = in.length;
-        Node root = tree.buildUtil(in, post, 0, n - 1, 0, n - 1);
+        TreeNode root = tree.buildUtil(in, post, 0, n - 1, 0, n - 1);
         System.out.println("Preorder of the constructed tree : ");
         tree.preOrder(root);
     }

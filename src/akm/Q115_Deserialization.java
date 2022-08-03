@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Q115_Deserialization {
     static int Empty =-1;
     static int index=0;
-    public static Node deserialization(ArrayList<Integer> arr) {
+    public static TreeNode deserialization(ArrayList<Integer> arr) {
         if (index == arr.size()) {
             return null;
         }
@@ -14,19 +14,19 @@ public class Q115_Deserialization {
         if (val == Empty) {
             return null;
         }
-        Node root = new Node(val);
+        TreeNode root = new TreeNode(val);
         root.left = deserialization(arr);
         root.right = deserialization(arr);
         return root;
     }
 
     //inorder
-    public static void inorder(Node root){
+    public static void inorder(TreeNode root){
         if (root==null){
             return;
         }
         inorder(root.left);
-        System.out.print(root.data+" ");
+        System.out.print(root.val +" ");
         inorder(root.right);
     }
     public static void main(String[] args) {
@@ -35,7 +35,7 @@ public class Q115_Deserialization {
         for (int i = 0; i < arr.length; i++) {
             lis.add(arr[i]);
         }
-        Node node = deserialization(lis);
-        inorder(node);
+        TreeNode treeNode = deserialization(lis);
+        inorder(treeNode);
     }
 }

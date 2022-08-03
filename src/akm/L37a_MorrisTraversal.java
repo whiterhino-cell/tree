@@ -2,42 +2,34 @@ package akm;
 
 public class L37a_MorrisTraversal {
 
-    Node root;
+    TreeNode root;
 
     void morrisTraversalPreorder() {
         morrisTraversalPreorder(root);
     }
 
-    // Preorder traversal without recursion and without stack
-    void morrisTraversalPreorder(Node node) {
-        while (node != null) {
+    void morrisTraversalPreorder(TreeNode treeNode) {
+        while (treeNode != null) {
 
-            // If left child is null, print the current node data. Move to
-            // right child.
-            if (node.left == null) {
-                System.out.print(node.data + " ");
-                node = node.right;
+            if (treeNode.left == null) {
+                System.out.print(treeNode.val + " ");
+                treeNode = treeNode.right;
             } else {
 
-                // Find inorder predecessor
-                Node current = node.left;
-                while (current.right != null && current.right != node) {
+                TreeNode current = treeNode.left;
+                while (current.right != null && current.right != treeNode) {
                     current = current.right;
                 }
 
-                // If the right child of inorder predecessor
-                // already points to this node
-                if (current.right == node) {
+                if (current.right == treeNode) {
                     current.right = null;
-                    node = node.right;
+                    treeNode = treeNode.right;
                 }
 
-                // If right child doesn't point to this node, then print
-                // this node and make right child point to this node
                 else {
-                    System.out.print(node.data + " ");
-                    current.right = node;
-                    node = node.left;
+                    System.out.print(treeNode.val + " ");
+                    current.right = treeNode;
+                    treeNode = treeNode.left;
                 }
             }
         }
@@ -47,29 +39,28 @@ public class L37a_MorrisTraversal {
         preorder(root);
     }
 
-    // Function for Standard preorder traversal
-    void preorder(Node node) {
-        if (node != null) {
-            System.out.print(node.data + " ");
-            preorder(node.left);
-            preorder(node.right);
+    void preorder(TreeNode treeNode) {
+        if (treeNode != null) {
+            System.out.print(treeNode.val + " ");
+            preorder(treeNode.left);
+            preorder(treeNode.right);
         }
     }
 
     // Driver programs to test above functions
     public static void main(String args[]) {
         L37a_MorrisTraversal tree = new L37a_MorrisTraversal();
-        tree.root = new Node(1);
-        tree.root.left = new Node(2);
-        tree.root.right = new Node(3);
-        tree.root.left.left = new Node(4);
-        tree.root.left.right = new Node(5);
-        tree.root.right.left = new Node(6);
-        tree.root.right.right = new Node(7);
-        tree.root.left.left.left = new Node(8);
-        tree.root.left.left.right = new Node(9);
-        tree.root.left.right.left = new Node(10);
-        tree.root.left.right.right = new Node(11);
+        tree.root = new TreeNode(1);
+        tree.root.left = new TreeNode(2);
+        tree.root.right = new TreeNode(3);
+        tree.root.left.left = new TreeNode(4);
+        tree.root.left.right = new TreeNode(5);
+        tree.root.right.left = new TreeNode(6);
+        tree.root.right.right = new TreeNode(7);
+        tree.root.left.left.left = new TreeNode(8);
+        tree.root.left.left.right = new TreeNode(9);
+        tree.root.left.right.left = new TreeNode(10);
+        tree.root.left.right.right = new TreeNode(11);
         tree.morrisTraversalPreorder();
         System.out.println("");
         tree.preorder();

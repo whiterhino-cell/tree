@@ -5,35 +5,28 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-//Count total Nodes in a COMPLETE Binary Tree O(Log^2 N) Approach
 public class L32_Count_total_Nodes_in_a_CompleteBinaryTree {
 
-    // function to print the sequence of burning nodes
     public static int search(TreeNode root, int num, Map<Integer, Set<Integer> > levelOrderMap) {
         if (root != null) {
-            // Condition to check whether target
-            // node is found or not in a tree
             if (root.val == num) {
                 levelOrderStoredInMap(root.left, 1, levelOrderMap);
                 levelOrderStoredInMap(root.right, 1, levelOrderMap);
-                // Return statements to prevent
-                // further function calls
+
                 return 1;
             }
             int k = search(root.left, num, levelOrderMap);
             if (k > 0) {
-                // store root in map with k
                 storeRootAtK(root, k, levelOrderMap);
-                // store level order for other branch
-                levelOrderStoredInMap(root.right, k + 1,
-                        levelOrderMap);
+
+                levelOrderStoredInMap(root.right, k + 1, levelOrderMap);
                 return k + 1;
             }
             k = search(root.right, num, levelOrderMap);
             if (k > 0) {
-                // store root in map with k
+
                 storeRootAtK(root, k, levelOrderMap);
-                // store level order for other branch
+
                 levelOrderStoredInMap(root.left, k + 1, levelOrderMap);
                 return k + 1;
             }
@@ -85,15 +78,10 @@ public class L32_Count_total_Nodes_in_a_CompleteBinaryTree {
         right.left = new TreeNode(22);
         right.right = new TreeNode(23);
 
-        // Utility map to store the sequence of burning
-        // nodes
         Map<Integer, Set<Integer> > levelOrderMap = new HashMap<>();
 
-        // search node and store the level order from that
-        // node in map
         search(root, 14, levelOrderMap);
 
-        // will print the sequence of burning nodes
         System.out.println(14);
         for (Integer level : levelOrderMap.keySet()) {
             for (Integer val : levelOrderMap.get(level)) {

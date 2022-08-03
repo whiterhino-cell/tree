@@ -30,7 +30,7 @@ class L28d_MaximumWidthOfABinaryTree {
         return ans;
     }
 
-    static class Pair {
+     class Pair {
         TreeNode node;
         int num;
         Pair(TreeNode _node, int _num) {

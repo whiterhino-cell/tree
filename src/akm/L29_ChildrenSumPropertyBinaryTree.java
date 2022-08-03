@@ -6,11 +6,11 @@ package akm;
 and a pointer to right child */
 
 class L29_ChildrenSumPropertyBinaryTree{
-    Node root;
+    TreeNode root;
 
     /* returns 1 if children sum property holds for the given
     node and both of its children*/
-    int isSumProperty(Node node)
+    int isSumProperty(TreeNode treeNode)
     {
 
 		/* left_data is left child data and right_data is for right
@@ -19,27 +19,27 @@ class L29_ChildrenSumPropertyBinaryTree{
 
 		/* If node is NULL or it's a leaf node then
 		return true */
-        if (node == null
-                || (node.left == null && node.right == null))
+        if (treeNode == null
+                || (treeNode.left == null && treeNode.right == null))
             return 1;
         else
         {
 
 			/* If left child is not present then 0 is used
 			as data of left child */
-            if (node.left != null)
-                left_data = node.left.data;
+            if (treeNode.left != null)
+                left_data = treeNode.left.val;
 
 			/* If right child is not present then 0 is used
 			as data of right child */
-            if (node.right != null)
-                right_data = node.right.data;
+            if (treeNode.right != null)
+                right_data = treeNode.right.val;
 
 			/* if the node and both of its children satisfy the
 			property return 1 else 0*/
-            if ((node.data == left_data + right_data)
-                    && (isSumProperty(node.left)!=0)
-                    && isSumProperty(node.right)!=0)
+            if ((treeNode.val == left_data + right_data)
+                    && (isSumProperty(treeNode.left)!=0)
+                    && isSumProperty(treeNode.right)!=0)
                 return 1;
             else
                 return 0;
@@ -50,12 +50,12 @@ class L29_ChildrenSumPropertyBinaryTree{
     public static void main(String[] args)
     {
         L29_ChildrenSumPropertyBinaryTree tree = new L29_ChildrenSumPropertyBinaryTree();
-        tree.root = new Node(10);
-        tree.root.left = new Node(8);
-        tree.root.right = new Node(2);
-        tree.root.left.left = new Node(3);
-        tree.root.left.right = new Node(5);
-        tree.root.right.right = new Node(2);
+        tree.root = new TreeNode(10);
+        tree.root.left = new TreeNode(8);
+        tree.root.right = new TreeNode(2);
+        tree.root.left.left = new TreeNode(3);
+        tree.root.left.right = new TreeNode(5);
+        tree.root.right.right = new TreeNode(2);
         if (tree.isSumProperty(tree.root) != 0)
             System.out.println("The given tree satisfies children"
                     + " sum property");
